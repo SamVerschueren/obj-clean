@@ -13,25 +13,25 @@ $ npm install --save obj-clean
 ## Usage
 
 ```js
-const objClean = require('obj-clean');
+const clean = require('obj-clean');
 
-objClean({foo: ''});
+clean({foo: ''});
 //=> {}
 
-objClean({foo: 'bar', baz: undefined});
+clean({foo: 'bar', baz: undefined});
 //=> {foo: 'bar'}
 
-objClean({foo: {bar: 'baz', baz: null}});
+clean({foo: {bar: 'baz', baz: null}});
 //=> {foo: {bar: 'baz'}}
 
-objClean({foo: {bar: 'baz', baz: {}});
+clean({foo: {bar: 'baz', baz: {}});
 //=> {foo: {bar: 'baz'}}
 ```
 
 
 ## API
 
-### objClean(obj)
+### clean(obj)
 
 Returns a clean object.
 
