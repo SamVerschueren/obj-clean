@@ -1,0 +1,43 @@
+{
+  "name": "obj-clean",
+  "version": "0.0.0",
+  "description": "Remove empty objects, empty strings, null and undefined values from objects.",
+  "license": "MIT",
+  "repository": "SamVerschueren/obj-clean",
+  "author": {
+    "name": "Sam Verschueren",
+    "email": "sam.verschueren@gmail.com",
+    "url": "github.com/SamVerschueren"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "xo && ava"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "object",
+    "clean",
+    "deep",
+    "deep-clean",
+    "proper",
+    "obj",
+    "object-clean",
+    "clean-object"
+  ],
+  "dependencies": {
+    "is-plain-object": "^2.0.1"
+  },
+  "devDependencies": {
+    "ava": "*",
+    "xo": "*"
+  },
+  "xo": {
+    "ignores": [
+      "test.js"
+    ]
+  }
+}
