@@ -21,8 +21,8 @@ clean({foo: ''});
 clean({foo: 'bar', baz: undefined});
 //=> {foo: 'bar'}
 
-clean({foo: {bar: 'baz', baz: null}});
-//=> {foo: {bar: 'baz'}}
+clean({foo: {bar: 'baz', baz: null, bax: false}});
+//=> {foo: {bar: 'baz', bax: false}}
 
 clean({foo: {bar: 'baz', baz: {}});
 //=> {foo: {bar: 'baz'}}
