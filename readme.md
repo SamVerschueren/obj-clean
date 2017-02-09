@@ -1,6 +1,6 @@
 # obj-clean [![Build Status](https://travis-ci.org/SamVerschueren/obj-clean.svg?branch=master)](https://travis-ci.org/SamVerschueren/obj-clean)
 
-> Remove empty objects, empty strings, `null` and `undefined` values from objects.
+> Remove empty objects, empty arrays, empty strings, `null` and `undefined` values from objects.
 
 
 ## Install
@@ -19,6 +19,9 @@ clean({foo: ''});
 //=> {}
 
 clean({foo: 'bar', baz: undefined});
+//=> {foo: 'bar'}
+
+clean({foo: 'bar', baz: []})
 //=> {foo: 'bar'}
 
 clean({foo: {bar: 'baz', baz: null, bax: false}});
