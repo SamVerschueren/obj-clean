@@ -32,7 +32,7 @@
     "is-plain-object": "^2.0.1"
   },
   "devDependencies": {
-    "ava": "*",
-    "xo": "*"
+    "ava": "^0.17.0",
+    "xo": "^0.16.0"
   }
 }
