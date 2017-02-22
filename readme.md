@@ -21,20 +21,20 @@ clean({foo: ''});
 clean({foo: 'bar', baz: undefined});
 //=> {foo: 'bar'}
 
-clean({foo: 'bar', baz: []})
-//=> {foo: 'bar'}
-
 clean({foo: {bar: 'baz', baz: null, bax: false}});
 //=> {foo: {bar: 'baz', bax: false}}
 
 clean({foo: {bar: 'baz', baz: {}});
 //=> {foo: {bar: 'baz'}}
+
+clean({foo: 'bar', baz: []}, {preserveArrays: false})
+//=> {foo: 'bar'}
 ```
 
 
 ## API
 
-### clean(obj)
+### clean(obj, [options])
 
 Returns a clean object.
 
@@ -43,6 +43,15 @@ Returns a clean object.
 Type: `Object`
 
 The object to clean up.
+
+#### options
+
+##### preserveArrays
+
+Type: `boolean`
+Default: `true`
+
+Set to `false` if you want to drop empty arrays.
 
 
 ## License

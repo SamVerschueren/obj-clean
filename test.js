@@ -11,7 +11,8 @@ test('shallow', t => {
 	t.deepEqual(fn({foo: 'bar', baz: null, bax: false}), {foo: 'bar', bax: false});
 	t.deepEqual(fn({foo: ''}), {});
 	t.deepEqual(fn({foo: 'bar', baz: ''}), {foo: 'bar'});
-	t.deepEqual(fn({foo: 'bar', baz: []}), {foo: 'bar'});
+	t.deepEqual(fn({foo: 'bar', baz: []}), {foo: 'bar', baz: []});
+	t.deepEqual(fn({foo: 'bar', baz: []}, {preserveArrays: false}), {foo: 'bar'});
 });
 
 test('deep', t => {
@@ -26,5 +27,6 @@ test('deep', t => {
 	t.deepEqual(fn({foo: {bar: 'baz', baz: ''}}), {foo: {bar: 'baz'}});
 	t.deepEqual(fn({foo: {bar: 'baz', baz: {}}}), {foo: {bar: 'baz'}});
 	t.deepEqual(fn({foo: {bar: 'baz', baz: {bar: 'baz', baz: ''}}}), {foo: {bar: 'baz', baz: {bar: 'baz'}}});
-	t.deepEqual(fn({foo: 'bar', bar: {baz: []}}), {foo: 'bar'});
+	t.deepEqual(fn({foo: 'bar', bar: {baz: []}}), {foo: 'bar', bar: {baz: []}});
+	t.deepEqual(fn({foo: 'bar', bar: {baz: []}}, {preserveArrays: false}), {foo: 'bar'});
 });
