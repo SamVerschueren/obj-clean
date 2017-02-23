@@ -27,6 +27,9 @@ clean({foo: {bar: 'baz', baz: null, bax: false}});
 clean({foo: {bar: 'baz', baz: {}});
 //=> {foo: {bar: 'baz'}}
 
+clean({foo: 'bar', baz: []});
+//> {foo: 'bar', baz: []}
+
 clean({foo: 'bar', baz: []}, {preserveArrays: false})
 //=> {foo: 'bar'}
 ```
@@ -48,7 +51,7 @@ The object to clean up.
 
 ##### preserveArrays
 
-Type: `boolean`
+Type: `boolean`<br>
 Default: `true`
 
 Set to `false` if you want to drop empty arrays.

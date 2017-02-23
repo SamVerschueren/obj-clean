@@ -2,7 +2,9 @@
 var isPlainObject = require('is-plain-object');
 
 function clean(obj, options) {
-	options = options || {preserveArrays: true};
+	options = Object.assign({
+		preserveArrays: true
+	}, options);
 
 	return Object.keys(obj).reduce(function (result, key) {
 		if (obj[key] === null || obj[key] === undefined) {
