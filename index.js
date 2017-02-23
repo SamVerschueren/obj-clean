@@ -1,5 +1,5 @@
 'use strict';
-var isPlainObject = require('is-plain-object');
+var isPlainObject = require('is-plain-obj');
 var objectAssign = require('object-assign');
 
 function clean(obj, options) {
