@@ -1,8 +1,9 @@
 'use strict';
 var isPlainObject = require('is-plain-object');
+var objectAssign = require('object-assign');
 
 function clean(obj, options) {
-	options = Object.assign({
+	options = objectAssign({
 		preserveArrays: true
 	}, options);
 
