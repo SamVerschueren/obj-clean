@@ -1,13 +1,12 @@
 'use strict';
-var isPlainObject = require('is-plain-obj');
-var objectAssign = require('object-assign');
+const isPlainObject = require('is-plain-obj');
 
-function clean(obj, options) {
-	options = objectAssign({
+const clean = (obj, options) => {
+	options = Object.assign({
 		preserveArrays: true
 	}, options);
 
-	return Object.keys(obj).reduce(function (result, key) {
+	return Object.keys(obj).reduce((result, key) => {
 		if (obj[key] === null || obj[key] === undefined) {
 			return result;
 		}
@@ -17,7 +16,7 @@ function clean(obj, options) {
 		}
 
 		if (isPlainObject(obj[key])) {
-			var res = clean(obj[key], options);
+			const res = clean(obj[key], options);
 
 			if (Object.keys(res).length > 0) {
 				result[key] = res;
@@ -28,6 +27,6 @@ function clean(obj, options) {
 
 		return result;
 	}, {});
-}
+};
 
 module.exports = clean;
