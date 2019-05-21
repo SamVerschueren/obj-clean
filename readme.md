@@ -28,10 +28,19 @@ clean({foo: {bar: 'baz', baz: {}});
 //=> {foo: {bar: 'baz'}}
 
 clean({foo: 'bar', baz: []});
-//> {foo: 'bar', baz: []}
+//=> {foo: 'bar', baz: []}
 
-clean({foo: 'bar', baz: []}, {preserveArrays: false})
-//=> {foo: 'bar'}
+clean({foo: [{unicorn: ''}]});
+//=> {foo: []}
+
+clean({foo: [{unicorn: '', rainbow: '🌈'}]});
+//=> {foo: [{rainbow: '🌈'}]}
+
+clean({foo: [{unicorn: ''}]}, {cleanArrays: false});
+//=> {foo: [{unicorn: ''}]}
+
+clean({foo: [{unicorn: ''}]}, {preserveArrays: false});
+//=> {}
 ```
 
 
@@ -54,7 +63,14 @@ The object to clean up.
 Type: `boolean`<br>
 Default: `true`
 
-Set to `false` if you want to drop empty arrays.
+Set to `false` if you want to remove empty arrays.
+
+##### cleanArrays
+
+Type: `boolean`<br>
+Default: `true`
+
+Set to `false` if you don't want to iterate over arrays and clean all the objects inside the array.
 
 
 ## License

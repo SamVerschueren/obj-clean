@@ -1,33 +1,50 @@
 'use strict';
 const isPlainObject = require('is-plain-obj');
 
-const clean = (obj, options) => {
+const cleaner = (input, options, level) => {
+	const result = {};
+
+	for (const key of Object.keys(input)) {
+		if (input[key] === null || input[key] === undefined) {
+			continue;
+		}
+
+		if (Array.isArray(input[key])) {
+			let res = input[key];
+
+			if (options.cleanArrays === true) {
+				res = input[key].map(item => cleaner(item, options, level + 1)).filter(Boolean);
+			}
+
+			if (options.preserveArrays === true || res.length > 0) {
+				result[key] = res;
+			}
+		} else if (isPlainObject(input[key])) {
+			const res = cleaner(input[key], options, level + 1);
+
+			if (res !== null && Object.keys(res).length > 0) {
+				result[key] = res;
+			}
+		} else if (input[key] !== '') {
+			result[key] = input[key];
+		}
+	}
+
+	if (level > 0 && Object.keys(result).length === 0) {
+		return null;
+	}
+
+	return result;
+};
+
+const clean = (input, options) => {
 	const opts = {
 		preserveArrays: true,
+		cleanArrays: true,
 		...options
 	};
 
-	return Object.keys(obj).reduce((result, key) => {
-		if (obj[key] === null || obj[key] === undefined) {
-			return result;
-		}
-
-		if (opts.preserveArrays === false && Array.isArray(obj[key]) && obj[key].length === 0) {
-			return result;
-		}
-
-		if (isPlainObject(obj[key])) {
-			const res = clean(obj[key], opts);
-
-			if (Object.keys(res).length > 0) {
-				result[key] = res;
-			}
-		} else if (obj[key] !== '') {
-			result[key] = obj[key];
-		}
-
-		return result;
-	}, {});
+	return cleaner(input, opts, 0);
 };
 
 module.exports = clean;
