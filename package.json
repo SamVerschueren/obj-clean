@@ -1,6 +1,6 @@
 {
 	"name": "obj-clean",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"description": "Remove empty objects, empty strings, null and undefined values from objects",
 	"license": "MIT",
 	"repository": "SamVerschueren/obj-clean",
