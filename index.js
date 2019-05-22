@@ -1,8 +1,30 @@
 'use strict';
 const isPlainObject = require('is-plain-obj');
 
+const cleanArray = (input, options, level) => {
+	let result = input;
+
+	if (options.cleanArrays === true) {
+		result = input.map(item => cleaner(item, options, level + 1)).filter(Boolean);
+	}
+
+	if (level === 0 || options.preserveArrays === true || result.length > 0) {
+		return result;
+	}
+
+	return null;
+};
+
 const cleaner = (input, options, level) => {
 	const result = {};
+
+	if (!isPlainObject(input)) {
+		if (Array.isArray(input)) {
+			return cleanArray(input, options, level);
+		}
+
+		return input;
+	}
 
 	for (const key of Object.keys(input)) {
 		if (input[key] === null || input[key] === undefined) {
@@ -10,14 +32,10 @@ const cleaner = (input, options, level) => {
 		}
 
 		if (Array.isArray(input[key])) {
-			let res = input[key];
+			const cleanedArray = cleanArray(input[key], options, level + 1);
 
-			if (options.cleanArrays === true) {
-				res = input[key].map(item => cleaner(item, options, level + 1)).filter(Boolean);
-			}
-
-			if (options.preserveArrays === true || res.length > 0) {
-				result[key] = res;
+			if (cleanedArray !== null) {
+				result[key] = cleanedArray;
 			}
 		} else if (isPlainObject(input[key])) {
 			const res = cleaner(input[key], options, level + 1);

@@ -33,7 +33,13 @@ test('deep', t => {
 
 test('clean arrays', t => {
 	t.deepEqual(clean({foo: [{bar: ''}]}), {foo: []});
+	t.deepEqual(clean({foo: [{bar: ''}, 'world', '', []]}), {foo: ['world', []]});
+	t.deepEqual(clean({foo: [{bar: ''}, 'world', '', []]}, {preserveArrays: false}), {foo: ['world']});
 	t.deepEqual(clean({foo: [{bar: ''}]}, {preserveArrays: false}), {});
 	t.deepEqual(clean({foo: [{bar: ''}, {unicorn: [{rainbow: ''}]}]}, {}), {foo: [{unicorn: []}]});
 	t.deepEqual(clean({foo: [{bar: ''}, {unicorn: [{rainbow: ''}]}]}, {preserveArrays: false}), {});
+	t.deepEqual(clean(['foo', '']), ['foo']);
+	t.deepEqual(clean([null, '']), []);
+	t.deepEqual(clean([null, ''], {cleanArrays: false}), [null, '']);
+	t.deepEqual(clean([null, ''], {preserveArrays: false}), []);
 });
